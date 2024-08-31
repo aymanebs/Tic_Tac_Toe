@@ -1,9 +1,21 @@
 let gridContainer = document.getElementById("grid-container");
-
-let gridMatrix = Array(20)
-  .fill(null)
-  .map(() => Array(20).fill(null));
+const Xscore_display = document.querySelector(".Xscore_display");
+const Oscore_display = document.querySelector(".Oscore_display");
+let gridMatrix = Array(20).fill(null).map(() => Array(20).fill(null));
 let currentPlayer = "X";
+let Xscore = parseInt(sessionStorage.getItem('Xscore')) || 0;
+let Oscore =parseInt(sessionStorage.getItem('Oscore')) || 0;
+
+// stocking the scores in session 
+
+Xscore_display.textContent = Xscore;
+Oscore_display.textContent = Oscore;
+
+sessionStorage.setItem('Xscore',Xscore);
+sessionStorage.setItem('Oscore',Oscore);
+
+
+// Loop to create the game board
 
 for (let i = 0; i < 400; i++) {
   const square = document.createElement("div");
@@ -16,6 +28,8 @@ for (let i = 0; i < 400; i++) {
   switchTurns(row, col, square);
 }
 
+// function to follow each player turn
+
 function switchTurns(row, col, square) {
   square.addEventListener("click", () => {
     if (gridMatrix[row][col] == null) {
@@ -27,75 +41,75 @@ function switchTurns(row, col, square) {
   });
 }
 
-
+// function to check win conditions
 
 function checkWin(row, col, currentPlayer) {
-  let hcounter = 0,vcounter = 0,dcounter = 0;
+  let hcounter = 0, vcounter = 0, dcounter1 = 0, dcounter2 = 0;
 
   for (let i = 1; i < 5; i++) {
-    if (col ==0 || gridMatrix[row][col] != gridMatrix[row][col - i]) {
+    if (col-i<0 || gridMatrix[row][col] != gridMatrix[row][col - i]) {
       break;
     }
     hcounter++;   
   }
   
   for (let i = 1; i < 5; i++) {
-    if (col ==19 || gridMatrix[row][col] != gridMatrix[row][col + i]) {
+    if (col+i>19 || gridMatrix[row][col] != gridMatrix[row][col + i]) {
       break;
     }
     hcounter++;
   }
   
   for(let i=1;i<5;i++){
-    if( row == 0 || gridMatrix[row][col] != gridMatrix[row-i][col]){
+    if( row-i< 0 || gridMatrix[row][col] != gridMatrix[row-i][col]){
         break;
     }
     vcounter++;
   }
   
   for(let i=1;i<5;i++){
-    if( row == 19 ||gridMatrix[row][col] != gridMatrix[row+i][col]){
+    if( row+i > 19 ||gridMatrix[row][col] != gridMatrix[row+i][col]){
         break;
     }
     vcounter ++;
   }
 
   for(let i=1;i<5;i++){
-    if(row == 0 || col == 0 ||gridMatrix[row][col] != gridMatrix[row-i][col-i]){
+    if(row - i < 0 || col-i < 0 ||gridMatrix[row][col] != gridMatrix[row-i][col-i]){
         break;
     }
-    dcounter ++;
+    dcounter1 ++;
   }
 
   for(let i=1;i<5;i++){
-    if(row == 19 || col == 19 ||gridMatrix[row][col] != gridMatrix[row+i][col+i]){
+    if(row+i> 19 || col+i> 19 ||gridMatrix[row][col] != gridMatrix[row+i][col+i]){
         break;
     }
-    dcounter ++;
+    dcounter1 ++;
   }
 
   for(let i=1;i<5;i++){
-    if(row == 0 || col==19 ||gridMatrix[row][col] != gridMatrix[row-i][col+i]){
+    if(row-i < 0 || col+i>19 ||gridMatrix[row][col] != gridMatrix[row-i][col+i]){
         break;
     }
-    dcounter ++;
+    dcounter2 ++;
   }
 
   for(let i=1;i<5;i++){
-    if(row==19|| col ==0||gridMatrix[row][col] != gridMatrix[row+i][col-i]){
+    if(row+i>19|| col-i<0||gridMatrix[row][col] != gridMatrix[row+i][col-i]){
         break;
     }
-    dcounter++;
+    dcounter2 ++;
   }
 
 
-  if (hcounter == 4 || vcounter == 4 || dcounter == 4) {
+  if (hcounter == 4 || vcounter == 4 || dcounter1 == 4 || dcounter2 == 4) {
+    currentPlayer == "X" ? sessionStorage.setItem('Xscore',++Xscore) : sessionStorage.setItem('Oscore',++Oscore);
     alert(currentPlayer + " has won !");
+    location.reload();
   }
 }
 
-const squares = document.getElementsByClassName("square");
 
-// console.log(squares);
 
-// console.table(gridMatrix);
+

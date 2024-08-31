@@ -1,18 +1,158 @@
-
-#grid-container{
-     display: grid;
-     grid-template-columns: repeat(20, 50px);
-     grid-template-rows: repeat(20, 50px);
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.square{
-
-    width: 50px;
-    height: 50px;
-    border: 1px solid;
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e6f3ff;  /* Light sky blue background */
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 50px;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(135, 206, 250, 0.3);  /* Light sky blue shadow */
+    padding: 30px;
+    text-align: center;
+}
+
+.title h1 {
+    color: #4a90e2;  /* Darker sky blue for title */
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+/* Updated styles for the score section */
+.scores {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.scores div {
+    padding: 10px 20px;
+    border-radius: 10px;
+    min-width: 150px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.scores div:first-child {
+    background-color: #e6f3ff;  /* Light blue background for X score */
+    color: #007bff;  /* Bright blue for X */
+}
+
+.scores div:last-child {
+    background-color: #e6fff0;  /* Light green background for O score */
+    color: #00a86b;  /* Green for O */
+}
+
+.Xscore_display, .Oscore_display {
+    font-weight: bold;
+    font-size: 1.4rem;
+    margin-left: 10px;
+}
+
+#grid-container {
+    display: grid;
+    grid-template-columns: repeat(20, 30px);
+    grid-template-rows: repeat(20, 30px);
+    gap: 2px;
+    background-color: #b3d9ff;  /* Medium sky blue for grid background */
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.square {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.square:hover {
+    background-color: #e6f3ff;  /* Light sky blue on hover */
+    transform: scale(1.05);
+}
+
+.square:active {
+    background-color: #cce6ff;  /* Slightly darker sky blue when clicked */
+    transform: scale(0.95);
+}
+
+/* Style for X */
+.square:nth-child(odd):not(:empty) {
+    color: #007bff;  /* Bright blue for X */
+}
+
+/* Style for O */
+.square:nth-child(even):not(:empty) {
+    color: #00a86b;  /* Green for O, for contrast */
+}
+
+@media (max-width: 800px) {
+    #grid-container {
+        grid-template-columns: repeat(20, 20px);
+        grid-template-rows: repeat(20, 20px);
+    }
+
+    .square {
+        width: 20px;
+        height: 20px;
+        font-size: 14px;
+    }
+    
+    .scores {
+        font-size: 1rem;
+    }
+    
+    .scores div {
+        min-width: 120px;
+        padding: 8px 15px;
+    }
+    
+    .Xscore_display, .Oscore_display {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 500px) {
+    #grid-container {
+        grid-template-columns: repeat(20, 15px);
+        grid-template-rows: repeat(20, 15px);
+    }
+
+    .square {
+        width: 15px;
+        height: 15px;
+        font-size: 10px;
+    }
+    
+    .scores {
+        font-size: 0.9rem;
+    }
+    
+    .scores div {
+        min-width: 100px;
+        padding: 5px 10px;
+    }
+    
+    .Xscore_display, .Oscore_display {
+        font-size: 1rem;
+    }
 }
