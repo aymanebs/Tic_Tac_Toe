@@ -36,6 +36,7 @@ function switchTurns(row, col, square) {
       gridMatrix[row][col] = currentPlayer;
       square.textContent = currentPlayer;
       checkWin(row, col, currentPlayer);
+      checkDraw(gridMatrix);
       currentPlayer == "X" ? (currentPlayer = "O") : (currentPlayer = "X");
     }
   });
@@ -108,8 +109,21 @@ function checkWin(row, col, currentPlayer) {
     alert(currentPlayer + " has won !");
     location.reload();
   }
+
 }
 
+//function to check for a draw
 
+function checkDraw(gridMatrix){
+    for(let row of gridMatrix){
+        for(let col of row){
+            if( col == null){
+                return false;
+            }      
+        }
+    }
+    alert("Draw !!");
+    return true;
+}
 
 
