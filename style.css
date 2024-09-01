@@ -1,4 +1,4 @@
-/* Reset default styles */
+
 * {
     margin: 0;
     padding: 0;
@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #e6f3ff;  /* Light sky blue background */
+    background-color: #e6f3ff;  
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,18 +17,18 @@ body {
 .container {
     background-color: #ffffff;
     border-radius: 15px;
-    box-shadow: 0 0 30px rgba(135, 206, 250, 0.3);  /* Light sky blue shadow */
+    box-shadow: 0 0 30px rgba(135, 206, 250, 0.3);  
     padding: 30px;
     text-align: center;
 }
 
 .title h1 {
-    color: #4a90e2;  /* Darker sky blue for title */
+    color: #4a90e2;  
     font-size: 3rem;
     margin-bottom: 20px;
 }
 
-/* Updated styles for the score section */
+
 .scores {
     display: flex;
     justify-content: space-around;
@@ -46,13 +46,13 @@ body {
 }
 
 .scores div:first-child {
-    background-color: #e6f3ff;  /* Light blue background for X score */
-    color: #007bff;  /* Bright blue for X */
+    background-color: #e6f3ff;  
+    color: #007bff;  
 }
 
 .scores div:last-child {
-    background-color: #e6fff0;  /* Light green background for O score */
-    color: #00a86b;  /* Green for O */
+    background-color: #e6fff0;  
+    color: #00a86b;  
 }
 
 .Xscore_display, .Oscore_display {
@@ -66,7 +66,7 @@ body {
     grid-template-columns: repeat(20, 30px);
     grid-template-rows: repeat(20, 30px);
     gap: 2px;
-    background-color: #b3d9ff;  /* Medium sky blue for grid background */
+    background-color: #b3d9ff;  
     padding: 10px;
     border-radius: 10px;
 }
@@ -86,23 +86,41 @@ body {
 }
 
 .square:hover {
-    background-color: #e6f3ff;  /* Light sky blue on hover */
+    background-color: #e6f3ff; 
     transform: scale(1.05);
 }
 
 .square:active {
-    background-color: #cce6ff;  /* Slightly darker sky blue when clicked */
+    background-color: #cce6ff; 
     transform: scale(0.95);
 }
 
-/* Style for X */
-.square:nth-child(odd):not(:empty) {
-    color: #007bff;  /* Bright blue for X */
+.replay {
+    background-color: #4a90e2; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Style for O */
-.square:nth-child(even):not(:empty) {
-    color: #00a86b;  /* Green for O, for contrast */
+.replay svg {
+    margin-right: 8px;
+}
+
+.replay:hover {
+    background-color: #3a7bc8; 
+    transform: scale(1.05);
+}
+
+.replay:active {
+    transform: scale(0.95);
 }
 
 @media (max-width: 800px) {
@@ -129,6 +147,16 @@ body {
     .Xscore_display, .Oscore_display {
         font-size: 1.2rem;
     }
+
+    .replay {
+        font-size: 1rem;
+        padding: 8px 16px;
+    }
+    
+    .replay svg {
+        width: 20px;
+        height: 20px;
+    }
 }
 
 @media (max-width: 500px) {
@@ -154,5 +182,16 @@ body {
     
     .Xscore_display, .Oscore_display {
         font-size: 1rem;
+    }
+
+    .replay {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+    
+    .replay svg {
+        width: 18px;
+        height: 18px;
+        margin-right: 6px;
     }
 }

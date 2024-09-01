@@ -1,6 +1,7 @@
 let gridContainer = document.getElementById("grid-container");
 const Xscore_display = document.querySelector(".Xscore_display");
 const Oscore_display = document.querySelector(".Oscore_display");
+const replay = document.querySelector(".replay");
 let gridMatrix = Array(20).fill(null).map(() => Array(20).fill(null));
 let currentPlayer = "X";
 let Xscore = parseInt(sessionStorage.getItem('Xscore')) || 0;
@@ -21,11 +22,11 @@ for (let i = 0; i < 400; i++) {
   const square = document.createElement("div");
   square.classList.add("square");
   gridContainer.appendChild(square);
-
   let row = Math.floor(i / 20);
   let col = Math.floor(i % 20);
 
   switchTurns(row, col, square);
+  
 }
 
 // function to follow each player turn
@@ -34,6 +35,7 @@ function switchTurns(row, col, square) {
   square.addEventListener("click", () => {
     if (gridMatrix[row][col] == null) {
       gridMatrix[row][col] = currentPlayer;
+      currentPlayer == "X" ? (square.style.color="#007bff") : (square.style.color="#00a86b");
       square.textContent = currentPlayer;
       checkWin(row, col, currentPlayer);
       checkDraw(gridMatrix);
@@ -41,6 +43,25 @@ function switchTurns(row, col, square) {
     }
   });
 }
+
+//emptying the board after clicking replay
+
+replay.addEventListener("click",empty);
+
+function empty(row,col){
+    
+    gridMatrix = Array(20).fill(null).map(()=>Array(20).fill(null));
+
+    const squares =gridContainer.children;
+
+    for(let square of squares){
+        square.textContent = "";
+    }
+
+    currentPlayer = "X";
+  
+}
+
 
 // function to check win conditions
 
