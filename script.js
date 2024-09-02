@@ -39,6 +39,8 @@ function switchTurns(row, col, square) {
       square.textContent = currentPlayer;
       checkWin(row, col, currentPlayer);
       checkDraw(gridMatrix);
+      Xscore_display.textContent = Xscore;
+      Oscore_display.textContent = Oscore;
       currentPlayer == "X" ? (currentPlayer = "O") : (currentPlayer = "X");
     }
   });
@@ -46,7 +48,10 @@ function switchTurns(row, col, square) {
 
 //emptying the board after clicking replay
 
-replay.addEventListener("click",empty);
+replay.addEventListener("click",()=>{
+  empty();
+  resetScore();
+});
 
 function empty(row,col){
     
@@ -60,6 +65,13 @@ function empty(row,col){
 
     currentPlayer = "X";
   
+}
+
+function resetScore(){
+  sessionStorage.setItem('Xscore',0);
+  sessionStorage.setItem('Oscore',0);
+  Xscore_display.textContent = 0;
+  Oscore_display.textContent = 0;
 }
 
 
@@ -128,7 +140,7 @@ function checkWin(row, col, currentPlayer) {
   if (hcounter == 4 || vcounter == 4 || dcounter1 == 4 || dcounter2 == 4) {
     currentPlayer == "X" ? sessionStorage.setItem('Xscore',++Xscore) : sessionStorage.setItem('Oscore',++Oscore);
     alert(currentPlayer + " has won !");
-    location.reload();
+    empty();
   }
 
 }
@@ -144,6 +156,7 @@ function checkDraw(gridMatrix){
         }
     }
     alert("Draw !!");
+    empty();
     return true;
 }
 
